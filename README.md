@@ -1,37 +1,23 @@
-## Welcome to GitHub Pages
+# fandrew19.github.io
 
-You can use the [editor on GitHub](https://github.com/fandrew19/fandrew19.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+Personal site for Andrews Frimpong Adu — bioinformatics engineer & computational genomicist.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+This is a custom-built, single-page site (`index.html`), **not** the default Jekyll theme, so it gives full control over layout and design. The `.nojekyll` file tells GitHub Pages to serve `index.html` as-is instead of trying to build it with Jekyll.
 
-### Markdown
+## How to publish
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+1. In this repo (`fandrew19/fandrew19.github.io`), replace the existing files with:
+   - `index.html`
+   - `.nojekyll`
+   - `assets/Andrews_Frimpong_Adu_CV.pdf`
+   - this `README.md`
+   You can delete `_config.yml` — it's no longer used since the site doesn't run through Jekyll.
+2. Commit and push to the `main` branch.
+3. In **Settings → Pages**, make sure the source is set to deploy from the `main` branch, root folder.
+4. Your site will be live at `https://fandrew19.github.io/` within a minute or two of the push.
 
-```markdown
-Syntax highlighted code block
+## Making updates later
 
-# Header 1
-## Header 2
-### Header 3
+Everything — text, links, publications, timeline entries — lives directly in `index.html` as plain HTML, organized by section (profile, skills, experience, education, projects, expertise, publications, teaching, contact). Search for the text you want to change and edit it directly; no build step is required.
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/fandrew19/fandrew19.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+To swap the downloadable CV, replace `assets/Andrews_Frimpong_Adu_CV.pdf` with a new file of the same name (or update the `href` links in `index.html` if you rename it).
