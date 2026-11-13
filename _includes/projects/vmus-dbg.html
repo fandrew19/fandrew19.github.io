@@ -14,8 +14,8 @@
         <li><b>Linear‑time extraction</b> of MUS boundaries and maximal repeats in O(N), via a generalised suffix tree (Ukkonen) or a lower‑memory suffix array + LCP backend (SA‑IS + Kasai).</li>
         <li><b>Iterative read correction</b> (substitutions and indels) voted from overlap evidence with coverage‑adaptive thresholds, restoring read consistency before extraction.</li>
         <li><b>Per‑position consensus</b> for gap sequences and node overhangs, plus post‑assembly polishing that re‑aligns every contributing read.</li>
-        <li><b>Coverage‑adaptive graph resolution</b>, so genuine low‑coverage regions survive alongside noise removal; PAF‑guided and KMP suffix/prefix scaffolding join residual contigs.</li>
-        <li><b>Self‑contained</b>: uses minimap2 when present, otherwise falls back to internal k‑mer seed‑and‑extend overlaps.</li>
+        <li><b>Coverage‑adaptive graph resolution</b>, so genuine low‑coverage regions survive alongside noise removal.</li>
+        <li><b>Self‑contained</b>: uses minimap2 when present.</li>
       </ul>
     </div>
   </div>
