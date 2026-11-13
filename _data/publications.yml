@@ -1,0 +1,69 @@
+# Publications, newest first. The home page shows the first few; /publications/ shows all.
+# To add a paper, copy an entry to the top and edit it.
+#   year: shown in the left column
+#   cite: the citation (HTML allowed; wrap your name and the key phrase in <b>…</b>)
+#   url / link_text: the DOI or article link
+
+- year: 2026
+  cite: >-
+    Ebenezer, T.E., El Allali, A., Hayah, I., Sharaf, A., Muzemil, S., <b>Adu, A.F.</b>, et al.
+    The <b>African DSI DataBank</b>: a federated infrastructure for Africa's genomic and biodiversity data.
+    <i>Nature Reviews Genetics.</i>
+  url: https://doi.org/10.1038/s41576-026-01017-2
+  link_text: doi.org/10.1038/s41576‑026‑01017‑2
+
+- year: 2026
+  cite: >-
+    <b>Adu, A.F.</b>, Menkah, E.S., Amoako‑Yirenkyi, P., Salifu, S.P.
+    <b>vMUS‑dBG</b>: A Novel De Bruijn Graph Model for De Novo Genome Assembly Using Variable‑Length Minimum Unique Substrings.
+    Preprint.
+  url: https://doi.org/10.21203/rs.3.rs-8997819/v1
+  link_text: doi.org/10.21203/rs.3.rs‑8997819/v1
+
+- year: 2026
+  cite: >-
+    <b>Adu, A.F.</b>, Menkah, E.S., Amoako‑Yirenkyi, P., Salifu, S.P.
+    <b>Read‑Consistent Minimum Unique Substrings</b>: A Parameter‑Free, Linear‑Time Framework for Genomic Sequence Representation.
+    <i>bioRxiv.</i>
+  url: https://doi.org/10.64898/2026.02.28.708734
+  link_text: doi.org/10.64898/2026.02.28.708734
+
+- year: 2026
+  cite: >-
+    Kuja, J.O., Waruhiu, C.R., Hayah, I., <b>Adu, A.F.</b>, et al.
+    Contributions of <b>African biodiversity genomics and bioinformatics</b> to the One Health nexus.
+    Preprint.
+  url: https://doi.org/10.5281/zenodo.18424656
+  link_text: doi.org/10.5281/zenodo.18424656
+
+- year: 2025
+  cite: >-
+    Hayah, I., Ezebuiro, V., Kagame, S.P., <b>Adu, A.F.</b>, et al.
+    Unlocking the <b>African bioeconomy</b> and strengthening biodiversity conservation through genomics and bioinformatics.
+    <i>npj Biodiversity.</i>
+  url: https://www.nature.com/articles/s44185-025-00102-9
+  link_text: nature.com/articles/s44185‑025‑00102‑9
+
+- year: 2024
+  cite: >-
+    Yakubu, B., Appiah, E.M., <b>Adu, A.F.</b>
+    <b>Pangenome analysis</b> of Helicobacter pylori isolates from selected areas of Africa indicated diverse antibiotic resistance and virulence genes.
+    <i>International Journal of Genomics.</i>
+  url: https://doi.org/10.1155/2024/5536117
+  link_text: doi.org/10.1155/2024/5536117
+
+- year: 2022
+  cite: >-
+    Opoku, N.K., Borkor, R.N., <b>Adu, A.F.</b>, et al.
+    Modelling the <b>Transmission Dynamics of Meningitis</b> among High and Low‑Risk Populations in Ghana.
+    <i>Journal of Abstract and Applied Mathematics.</i>
+  url: https://doi.org/10.1155/2022/9084283
+  link_text: doi.org/10.1155/2022/9084283
+
+- year: 2021
+  cite: >-
+    Opoku, N., Afutu, R., <b>Adu, A.F.</b>, et al.
+    Model <b>Persistency and Stability Analysis</b> of HIV/AIDS Transmission Dynamics with PrEP and ART.
+    <i>SSRN.</i>
+  url: https://dx.doi.org/10.2139/ssrn.3893639
+  link_text: doi.org/10.2139/ssrn.3893639

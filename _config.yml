@@ -1,3 +1,7 @@
-theme: jekyll-theme-minimal
 title: Andrews Adu
 description: Scientist | Bioinformatics
+url: https://fandrew19.github.io
+
+# Files that should not be published as part of the site
+exclude:
+  - README.md

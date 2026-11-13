@@ -1,0 +1,28 @@
+<div class="proj-card featured">
+  <div class="tag-row"><span>C++17</span><span>Python / pybind11</span><span>Suffix arrays</span><span>Graph algorithms</span><span>PacBio HiFi · ONT</span></div>
+  <h3>vMUS‑dBG</h3>
+  <span class="sub">A variable‑length de Bruijn graph for de novo genome assembly — PhD dissertation, 2026</span>
+  <div class="featured-grid">
+    <div>
+      <p class="problem">Every de Bruijn graph assembler makes the same compromise: pick one k. Small k collapses repeats; large k shatters unique sequence. vMUS‑dBG removes the choice.</p>
+      <p>Instead of fixed‑length k‑mers, each graph node is a <b>Minimum Unique Substring (MUS)</b> — the shortest substring at a position that is unique in the read set and cannot be shortened on either side without losing that uniqueness. MUS length adapts to the genome itself: short in unique regions, long exactly where it must span a repeat boundary. Edges carry the maximal repeat (or gap sequence) lying between consecutive MUSs in a read, so a single assembly run resolves both unique and repetitive regions.</p>
+      <p>The model builds on the duality between MUSs and maximal repeats (Ilie &amp; Smyth) and the Manifold / A‑Bruijn graph (Lin &amp; Pevzner), and extends them to fragmented, error‑prone reads through a <b>read‑consistent</b> definition of uniqueness.</p>
+    </div>
+    <div>
+      <span class="mini-label">// how it works</span>
+      <ul>
+        <li><b>Linear‑time extraction</b> of MUS boundaries and maximal repeats in O(N), via a generalised suffix tree (Ukkonen) or a lower‑memory suffix array + LCP backend (SA‑IS + Kasai).</li>
+        <li><b>Iterative read correction</b> (substitutions and indels) voted from overlap evidence with coverage‑adaptive thresholds, restoring read consistency before extraction.</li>
+        <li><b>Per‑position consensus</b> for gap sequences and node overhangs, plus post‑assembly polishing that re‑aligns every contributing read.</li>
+        <li><b>Coverage‑adaptive graph resolution</b>, so genuine low‑coverage regions survive alongside noise removal; PAF‑guided and KMP suffix/prefix scaffolding join residual contigs.</li>
+        <li><b>Self‑contained</b>: uses minimap2 when present, otherwise falls back to internal k‑mer seed‑and‑extend overlaps.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="kvs">
+    <span><b>core</b> C++17 extensions, Python orchestration</span>
+    <span><b>reads</b> PacBio HiFi, ONT</span>
+    <span><b>relevance</b> repeat‑rich genomes, heterogeneous / metagenomic mixtures</span>
+  </div>
+  <a class="proj-link" href="https://doi.org/10.21203/rs.3.rs-8997819/v1" target="_blank" rel="noopener">read the preprint →</a>
+</div>

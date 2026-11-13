@@ -1,0 +1,11 @@
+{%- comment -%} Usage: {% include publication-list.html limit=4 %}  (omit limit to show all) {%- endcomment -%}
+{%- assign pubs = site.data.publications -%}
+{%- if include.limit -%}{%- assign pubs = pubs | slice: 0, include.limit -%}{%- endif -%}
+<div class="pub-list reveal">
+  {%- for p in pubs %}
+  <div class="pub">
+    <span class="yr">{{ p.year }}</span>
+    <span class="cite">{{ p.cite }} <a href="{{ p.url }}" target="_blank" rel="noopener">{{ p.link_text }}</a></span>
+  </div>
+  {%- endfor %}
+</div>

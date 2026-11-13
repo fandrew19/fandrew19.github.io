@@ -1,0 +1,17 @@
+<header class="topbar">
+  <div class="wrap">
+    <a class="prompt" href="{{ '/' | relative_url }}">
+      <span class="user">andrews</span><span class="at">@</span><span class="path">knust-hpc</span><span class="at">:~{{ page.prompt_path }}$</span> {{ page.prompt_cmd | default: 'whoami' }}<span class="cursor"></span>
+    </a>
+    <input type="checkbox" id="navToggle">
+    <label for="navToggle" class="burger" aria-label="Toggle menu"><span></span><span></span><span></span></label>
+    <nav class="navlinks">
+      <a href="{{ '/#about' | relative_url }}">about</a>
+      <a href="{{ '/#experience' | relative_url }}">experience</a>
+      <a href="{{ '/projects/' | relative_url }}"{% if page.url == '/projects/' %} class="active" aria-current="page"{% endif %}>projects</a>
+      <a href="{{ '/publications/' | relative_url }}"{% if page.url == '/publications/' %} class="active" aria-current="page"{% endif %}>publications</a>
+      <a href="{{ '/assets/Andrews_Frimpong_Adu_CV.pdf' | relative_url }}" target="_blank" rel="noopener">cv.pdf</a>
+      <a href="#contact" class="resume-link">contact</a>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,28 @@
+<div class="proj-card featured">
+  <div class="tag-row"><span>Python / Flask</span><span>USSD · SMS · WhatsApp</span><span>Redis + RQ</span><span>Ensembl · UCSC · GTEx · 1000G</span><span>MobileNet compression</span></div>
+  <h3>AfricaBioLite</h3>
+  <span class="sub">AfricaBP Genomic Gateway — genome browsing from a feature phone · Lead AI Developer, African BioGenome Project</span>
+  <div class="featured-grid">
+    <div>
+      <p class="problem">Most genomic resources assume a broadband connection and a browser. AfricaBioLite lets a researcher, plant breeder or clinician query them by SMS, USSD or WhatsApp, from any phone, anywhere with a mobile signal.</p>
+      <p>A user sends a short command — <span class="mono" style="font-size:13px;">GENE HUMAN BRAF</span>, <span class="mono" style="font-size:13px;">POPGEN HUMAN rs113488022</span>, <span class="mono" style="font-size:13px;">MAP CASSAVA 1:0‑50000</span> — or walks a USSD menu. The gateway queries <b>Ensembl, UCSC, GTEx, EMBL‑EBI, NCBI and 1000 Genomes</b> and returns a condensed text answer, an ASCII genome track for feature phones, or a compressed track image.</p>
+      <p>It covers genes, variants with ClinVar significance, sequence, orthologs, disease associations, tissue expression and <b>allele frequencies across seven African 1000 Genomes populations</b> with Fst differentiation, for 15 species from human to cassava, yam, cocoa and <i>Plasmodium</i>. Curated trait and drug‑resistance loci (e.g. <i>kelch13</i>, <i>HBB</i>, <i>G6PD</i>, <i>APOL1</i>) are shown only after Ensembl verifies them on the current assembly.</p>
+    </div>
+    <div>
+      <span class="mini-label">// engineering</span>
+      <ul>
+        <li><b>One WSGI app serves every channel</b> (USSD, SMS, WhatsApp Cloud API); stateless USSD sessions replay through a menu state machine, so it scales across gunicorn workers.</li>
+        <li><b>USSD never blocks on slow APIs</b>: queries run on a Redis/RQ job queue, answering on‑screen when fast and by SMS with a reference number otherwise.</li>
+        <li><b>Neural image compression</b>: a MobileNet encoder squeezes genome‑track images into a ~2 KB latent sent as a handful of SMS packets and decoded on the other end; runs on a Raspberry Pi with a USB GSM modem.</li>
+        <li><b>Offline‑first SQLite cache</b> with per‑data‑type expiry and prefetch of key loci over Wi‑Fi.</li>
+        <li><b>Privacy and safety</b>: phone numbers are keyed pseudonyms, never stored raw; results carry a clinical disclaimer.</li>
+        <li><b>Nine languages</b> (English, Swahili, French, Hausa, Yoruba, Amharic, Twi, Arabic, Portuguese), each gated behind native‑speaker review, with checks that a translation can't break menu numbering or the 182‑character USSD limit.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="kvs">
+    <span><b>tests</b> 257 offline, with recorded API fixtures</span>
+    <span><b>ops</b> systemd + nginx, weekly live‑API checks in CI</span>
+    <span><b>species</b> 15 crops, pathogens &amp; vertebrates</span>
+  </div>
+</div>

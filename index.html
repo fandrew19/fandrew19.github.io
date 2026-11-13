@@ -1,408 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Andrews Frimpong Adu — Bioinformatics Engineer &amp; Computational Genomicist</title>
-<meta name="description" content="Andrews Frimpong Adu — Bioinformatics engineer and computational genomicist building genome assembly, pangenomics and multi-omics pipelines across African genomics infrastructure.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2218%22 fill=%22%2313221D%22/><text x=%2250%22 y=%2266%22 font-size=%2252%22 font-family=%22monospace%22 fill=%22%23C6892E%22 text-anchor=%22middle%22>A</text></svg>">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --ink:#13221D;
-    --ink-soft:#3B4B44;
-    --paper:#E8EBE1;
-    --paper-alt:#DCE0D4;
-    --card:#F2F4EC;
-    --gold:#C6892E;
-    --teal:#2C6058;
-    --rust:#A6432A;
-    --line: rgba(19,34,29,0.14);
-    --line-strong: rgba(19,34,29,0.28);
-    --maxw: 1120px;
-    --radius: 6px;
-  }
-
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
-  }
-
-  body{
-    margin:0;
-    background:var(--paper);
-    color:var(--ink);
-    font-family:'Inter', sans-serif;
-    font-size:16px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-
-  a{color:inherit;}
-  .mono{font-family:'JetBrains Mono', monospace;}
-  .serif{font-family:'Instrument Serif', serif;}
-
-  ::selection{background:var(--gold); color:var(--paper);}
-
-  /* ---------- background texture ---------- */
-  .basepairs{
-    position:fixed; inset:0; z-index:-1;
-    overflow:hidden; pointer-events:none;
-    opacity:0.05;
-    font-family:'JetBrains Mono', monospace;
-    font-size:13px;
-    line-height:1.4;
-    color:var(--ink);
-    white-space:pre-wrap;
-    word-break:break-all;
-    padding:2rem;
-  }
-
-  /* ---------- layout helpers ---------- */
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
-  section{padding:96px 0;}
-  @media (max-width:720px){ section{padding:64px 0;} }
-
-  /* ---------- topbar / terminal nav ---------- */
-  header.topbar{
-    position:sticky; top:0; z-index:50;
-    background:rgba(232,235,225,0.88);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
-  }
-  .topbar .wrap{
-    display:flex; align-items:center; justify-content:space-between;
-    height:56px;
-  }
-  .prompt{
-    font-family:'JetBrains Mono', monospace;
-    font-size:13px;
-    color:var(--teal);
-    font-weight:500;
-    white-space:nowrap;
-  }
-  .prompt .user{color:var(--rust);}
-  .prompt .at{color:var(--ink-soft);}
-  .prompt .path{color:var(--gold);}
-  .prompt .cursor{
-    display:inline-block; width:7px; height:14px; background:var(--ink);
-    margin-left:2px; vertical-align:-2px;
-    animation:blink 1.1s steps(1) infinite;
-  }
-  @keyframes blink{ 50%{opacity:0;} }
-
-  nav.navlinks{display:flex; gap:26px; align-items:center;}
-  nav.navlinks a{
-    font-family:'JetBrains Mono', monospace;
-    font-size:12.5px;
-    text-decoration:none;
-    color:var(--ink-soft);
-    letter-spacing:0.02em;
-    position:relative;
-    padding:4px 0;
-  }
-  nav.navlinks a::before{content:"./"; color:var(--line-strong);}
-  nav.navlinks a:hover{color:var(--rust);}
-  .navlinks .resume-link{
-    color:var(--paper); background:var(--ink); padding:7px 13px; border-radius:4px;
-  }
-  .navlinks .resume-link::before{content:""; }
-  .navlinks .resume-link:hover{background:var(--rust); color:var(--paper);}
-
-  #navToggle{display:none;}
-  .burger{display:none; flex-direction:column; gap:4px; cursor:pointer; background:none; border:none; padding:6px;}
-  .burger span{width:20px; height:2px; background:var(--ink); display:block;}
-
-  @media (max-width:760px){
-    nav.navlinks{
-      position:fixed; top:56px; left:0; right:0;
-      background:var(--paper); border-bottom:1px solid var(--line);
-      flex-direction:column; align-items:flex-start; gap:0;
-      padding:8px 28px 20px;
-      transform:translateY(-8px);
-      opacity:0; pointer-events:none;
-      transition:opacity .2s ease, transform .2s ease;
-    }
-    nav.navlinks a{padding:10px 0; width:100%; border-bottom:1px solid var(--line);}
-    #navToggle:checked ~ nav.navlinks{opacity:1; pointer-events:auto; transform:translateY(0);}
-    .burger{display:flex;}
-  }
-
-  /* ---------- hero ---------- */
-  .hero{padding:76px 0 60px;}
-  .hero .wrap{
-    display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center;
-  }
-  @media (max-width:900px){
-    .hero .wrap{grid-template-columns:1fr; gap:40px;}
-  }
-
-  .eyebrow{
-    font-family:'JetBrains Mono', monospace;
-    font-size:12.5px;
-    color:var(--teal);
-    letter-spacing:0.03em;
-    display:inline-flex; align-items:center; gap:8px;
-    margin-bottom:18px;
-  }
-  .eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--rust); display:inline-block;}
-
-  h1.name{
-    font-family:'Instrument Serif', serif;
-    font-weight:400;
-    font-size:clamp(44px, 6vw, 68px);
-    line-height:1.02;
-    margin:0 0 6px;
-    letter-spacing:-0.01em;
-  }
-  h1.name em{font-style:italic; color:var(--rust);}
-
-  .role{
-    font-family:'JetBrains Mono', monospace;
-    font-size:15px;
-    color:var(--ink-soft);
-    margin:0 0 26px;
-  }
-
-  .lede{
-    font-size:17px;
-    color:var(--ink-soft);
-    max-width:52ch;
-    margin:0 0 30px;
-  }
-
-  .cta-row{display:flex; flex-wrap:wrap; gap:12px;}
-  .btn{
-    font-family:'JetBrains Mono', monospace;
-    font-size:13px;
-    text-decoration:none;
-    padding:11px 18px;
-    border-radius:4px;
-    border:1px solid var(--line-strong);
-    display:inline-flex; align-items:center; gap:8px;
-    transition:all .15s ease;
-  }
-  .btn.primary{background:var(--ink); color:var(--paper); border-color:var(--ink);}
-  .btn.primary:hover{background:var(--rust); border-color:var(--rust);}
-  .btn.ghost:hover{border-color:var(--ink); background:var(--card);}
-
-  /* ---------- graph signature ---------- */
-  .graph-panel{
-    background:var(--card);
-    border:1px solid var(--line);
-    border-radius:8px;
-    padding:20px 20px 16px;
-    position:relative;
-  }
-  .graph-caption{
-    font-family:'JetBrains Mono', monospace;
-    font-size:11px;
-    color:var(--ink-soft);
-    display:flex; justify-content:space-between;
-    margin-top:10px;
-    border-top:1px solid var(--line);
-    padding-top:10px;
-  }
-  .graph-caption span.k{color:var(--rust);}
-
-  #dbg-node{fill:var(--card); stroke:var(--ink); stroke-width:1.4;}
-  .n-teal{stroke:var(--teal) !important;}
-  .n-gold{stroke:var(--gold) !important;}
-  .n-rust{stroke:var(--rust) !important;}
-  .edge{fill:none; stroke:var(--ink-soft); stroke-width:1.3; opacity:0.55;}
-  .edge-draw{stroke-dasharray:220; stroke-dashoffset:220; animation:draw 2.6s ease forwards;}
-  @keyframes draw{to{stroke-dashoffset:0;}}
-  .kmer-label{font-family:'JetBrains Mono', monospace; font-size:10.5px; fill:var(--ink); text-anchor:middle;}
-
-  /* ---------- section header (fasta-style) ---------- */
-  .sec-head{
-    display:flex; align-items:baseline; gap:16px;
-    margin-bottom:44px; flex-wrap:wrap;
-  }
-  .filetag{
-    font-family:'JetBrains Mono', monospace;
-    font-size:12.5px;
-    color:var(--teal);
-    background:var(--card);
-    border:1px solid var(--line);
-    padding:5px 10px;
-    border-radius:4px;
-    white-space:nowrap;
-  }
-  .sec-head h2{
-    font-family:'Instrument Serif', serif;
-    font-weight:400;
-    font-style:italic;
-    font-size:clamp(28px,4vw,38px);
-    margin:0;
-  }
-  .sec-rule{flex:1; height:1px; background:repeating-linear-gradient(90deg, var(--line-strong) 0 6px, transparent 6px 12px); min-width:40px;}
-
-  /* ---------- profile / about ---------- */
-  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:52px;}
-  @media (max-width:860px){.about-grid{grid-template-columns:1fr;}}
-  .about-grid p{color:var(--ink-soft); font-size:16px; margin:0 0 16px;}
-  .about-grid p:first-child{
-    font-size:19px; color:var(--ink); font-family:'Instrument Serif', serif; font-style:italic; line-height:1.45;
-  }
-
-  .interest-tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:6px;}
-  .tag{
-    font-family:'JetBrains Mono', monospace;
-    font-size:12px;
-    padding:6px 10px;
-    border:1px solid var(--line-strong);
-    border-radius:4px;
-    color:var(--ink-soft);
-  }
-  .side-label{
-    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--rust);
-    text-transform:uppercase; letter-spacing:0.06em; margin:0 0 12px;
-  }
-
-  /* ---------- skills grid ---------- */
-  .skills-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--line-strong); border:1px solid var(--line-strong); border-radius:8px; overflow:hidden;}
-  @media (max-width:760px){.skills-grid{grid-template-columns:1fr;}}
-  .skill-card{background:var(--card); padding:26px 24px;}
-  .skill-card .k{font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--gold); margin-bottom:10px; display:block;}
-  .skill-card h3{font-family:'Instrument Serif', serif; font-style:italic; font-weight:400; font-size:21px; margin:0 0 8px;}
-  .skill-card p{margin:0; color:var(--ink-soft); font-size:14.5px;}
-
-  /* ---------- timeline (experience / education) ---------- */
-  .log{border-left:1px solid var(--line-strong); margin-left:6px;}
-  .log-entry{position:relative; padding:0 0 40px 30px;}
-  .log-entry:last-child{padding-bottom:4px;}
-  .log-entry::before{
-    content:""; position:absolute; left:-5.5px; top:4px;
-    width:10px; height:10px; border-radius:50%;
-    background:var(--paper); border:2px solid var(--rust);
-  }
-  .log-time{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--teal); display:block; margin-bottom:6px;}
-  .log-entry h3{font-family:'Instrument Serif', serif; font-style:italic; font-weight:400; font-size:23px; margin:0 0 3px;}
-  .log-entry .org{font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--ink-soft); margin-bottom:10px; display:block;}
-  .log-entry p{margin:0; color:var(--ink-soft); font-size:15px; max-width:64ch;}
-
-  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:64px;}
-  @media (max-width:860px){.two-col{grid-template-columns:1fr; gap:8px;}}
-
-  /* ---------- projects ---------- */
-  .proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
-  @media (max-width:760px){.proj-grid{grid-template-columns:1fr;}}
-  .proj-card{
-    background:var(--card); border:1px solid var(--line);
-    border-radius:8px; padding:26px;
-    transition:border-color .15s ease, transform .15s ease;
-  }
-  .proj-card:hover{border-color:var(--ink-soft); transform:translateY(-2px);}
-  .proj-card .tag-row{margin-bottom:14px;}
-  .proj-card .tag-row span{
-    font-family:'JetBrains Mono', monospace; font-size:10.5px;
-    color:var(--teal); border:1px solid var(--line-strong);
-    padding:3px 7px; border-radius:3px; margin-right:6px; display:inline-block; margin-bottom:6px;
-  }
-  .proj-card h3{font-family:'Instrument Serif', serif; font-style:italic; font-weight:400; font-size:24px; margin:0 0 4px;}
-  .proj-card .sub{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--ink-soft); margin-bottom:14px; display:block;}
-  .proj-card ul{margin:0; padding-left:18px; color:var(--ink-soft); font-size:14.5px;}
-  .proj-card li{margin-bottom:6px;}
-
-  /* ---------- expertise ---------- */
-  .expertise-table{width:100%; border-collapse:collapse;}
-  .expertise-table tr{border-bottom:1px solid var(--line);}
-  .expertise-table tr:last-child{border-bottom:none;}
-  .expertise-table td{padding:16px 0; vertical-align:top;}
-  .expertise-table td.label{
-    font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--rust);
-    width:190px; padding-right:20px; white-space:nowrap;
-  }
-  .expertise-table td.val{color:var(--ink-soft); font-size:14.5px; line-height:1.7;}
-  @media (max-width:640px){
-    .expertise-table td.label{white-space:normal; width:120px;}
-  }
-
-  /* ---------- publications ---------- */
-  .pub-list{border-top:1px solid var(--line);}
-  .pub{
-    display:grid; grid-template-columns:70px 1fr; gap:20px;
-    padding:20px 0; border-bottom:1px solid var(--line);
-  }
-  .pub .yr{font-family:'JetBrains Mono', monospace; color:var(--gold); font-size:14px; padding-top:2px;}
-  .pub .cite{font-size:15px; color:var(--ink-soft);}
-  .pub .cite b{color:var(--ink); font-weight:600;}
-  .pub .cite a{color:var(--teal); text-decoration:none; border-bottom:1px dotted var(--teal); font-family:'JetBrains Mono', monospace; font-size:13px;}
-  .pub .cite a:hover{color:var(--rust); border-color:var(--rust);}
-
-  /* ---------- workshops / service ---------- */
-  .flat-list{list-style:none; margin:0; padding:0;}
-  .flat-list li{
-    padding:12px 0; border-bottom:1px solid var(--line);
-    display:flex; gap:16px; font-size:14.5px; color:var(--ink-soft);
-  }
-  .flat-list li .yr{font-family:'JetBrains Mono', monospace; color:var(--teal); flex:0 0 52px;}
-
-  /* ---------- footer / contact ---------- */
-  footer{
-    background:var(--ink); color:var(--paper);
-    padding:80px 0 40px;
-  }
-  footer .eyebrow{color:var(--gold);}
-  footer h2{
-    font-family:'Instrument Serif', serif; font-style:italic; font-weight:400;
-    font-size:clamp(30px,5vw,46px); margin:0 0 20px; max-width:none; white-space:nowrap;
-  }
-  footer p.lede2{color:rgba(232,235,225,0.7); max-width:52ch; margin:0 0 34px;}
-  .contact-grid{display:grid; grid-template-columns:repeat(4, auto); gap:24px 40px; margin-bottom:56px;}
-  @media (max-width:700px){.contact-grid{grid-template-columns:1fr 1fr;}}
-  .contact-grid a{
-    font-family:'JetBrains Mono', monospace; font-size:13.5px;
-    text-decoration:none; color:var(--paper);
-    border-bottom:1px solid rgba(232,235,225,0.25);
-    padding-bottom:4px; display:inline-block;
-  }
-  .contact-grid a:hover{border-color:var(--gold); color:var(--gold);}
-  .contact-grid .lbl{display:block; font-size:11px; color:rgba(232,235,225,0.45); margin-bottom:6px; text-transform:uppercase; letter-spacing:0.05em;}
-  footer .foot-bottom{
-    border-top:1px solid rgba(232,235,225,0.15);
-    padding-top:24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
-    font-family:'JetBrains Mono', monospace; font-size:12px; color:rgba(232,235,225,0.45);
-  }
-
-  /* scroll reveal */
-  .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
-  .reveal.in{opacity:1; transform:translateY(0);}
-
-  :focus-visible{outline:2px solid var(--rust); outline-offset:3px;}
-</style>
-</head>
-<body>
-
-<div class="basepairs" id="basepairs" aria-hidden="true"></div>
-
-<header class="topbar">
-  <div class="wrap">
-    <span class="prompt">
-      <span class="user">andrews</span><span class="at">@</span><span class="path">knust-hpc</span><span class="at">:~$</span> whoami<span class="cursor"></span>
-    </span>
-    <input type="checkbox" id="navToggle">
-    <label for="navToggle" class="burger" aria-label="Toggle menu"><span></span><span></span><span></span></label>
-    <nav class="navlinks">
-      <a href="#about">about</a>
-      <a href="#experience">experience</a>
-      <a href="#projects">projects</a>
-      <a href="#publications">publications</a>
-      <a href="assets/Andrews_Frimpong_Adu_CV.pdf" target="_blank" rel="noopener">cv.pdf</a>
-      <a href="#contact" class="resume-link">contact</a>
-    </nav>
-  </div>
-</header>
+---
+layout: default
+description: Andrews Frimpong Adu — Bioinformatics engineer and computational genomicist building genome assembly, pangenomics and multi-omics pipelines across African genomics infrastructure.
+---
 
 <section class="hero">
   <div class="wrap">
     <div>
-      <div class="eyebrow"><span class="dot"></span> KNUST, Kumasi — Ghana</div>
+      <div class="hero-id">
+        <img class="portrait" src="assets/andrews-adu.jpg" alt="Portrait of Andrews Frimpong Adu" width="112" height="112">
+        <div class="eyebrow"><span class="dot"></span> KNUST, Kumasi — Ghana</div>
+      </div>
       <h1 class="name">Andrews Frimpong <em>Adu</em></h1>
       <p class="role">bioinformatics engineer / computational genomicist / ML-AI Developer</p>
       <p class="lede">
@@ -479,7 +86,7 @@
     <div class="about-grid">
       <div class="reveal">
         <p>Computational genomics specialist with a PhD in Biodata Analytics and over five years turning raw next‑generation sequencing and multi‑omics data into analysis‑ready science on Linux/HPC infrastructure.</p>
-        <p>My research advances pangenomics, machine learning applications in biosciences, and graph-based genome representations. I am deeply committed to capacity building—having trained and mentored over 50 students and researchers in reproducible computational biology workflows and Linux/HPC system administration.</p>
+        <p>My research advances genomics, machine learning applications in biosciences, and graph-based genome representations. I am deeply committed to capacity building—having trained and mentored over 100 students and researchers in reproducible computational biology workflows and Linux/HPC system administration.</p>
         <p>Fluent in Python, R, C/C++, Bash, SQL, Django, PostgreSQL</p>
       </div>
       <div class="reveal">
@@ -496,7 +103,7 @@
           <span class="tag">Human health &amp; disease</span>
         </div>
         <p class="side-label" style="margin-top:32px;">// currently</p>
-        <p style="color:var(--ink-soft); font-size:14.5px; margin:0;">Research Assistant &amp; Systems Administrator, Biodata Research Group, KNUST — plus Lead AI Developer, African BioGenome Project.</p>
+        <p style="color:var(--ink-soft); font-size:14.5px; margin:0;">Research Assistant &amp; Systems Administrator, Biodata Research Group, KNUST — plus Lead AI Developer, African BioGenome Project, and team member of the African DSI DataBank.</p>
       </div>
     </div>
   </div>
@@ -532,13 +139,19 @@
         <span class="log-time">2024 — present</span>
         <h3>Lead AI Developer</h3>
         <span class="org">African BioGenome Project (AfricaBP) · Africa</span>
-        <p>Design cost‑efficient computational solutions for genomic data visualisation and delivery, optimising query pipelines with MobileNets for low‑latency, high‑throughput access to large‑scale genomic datasets. Built African BioLite, a mobile text‑based (USSD/SMS &amp; WhatsApp) application for genomic analysis in low‑connectivity regions.</p>
+        <p>Design cost‑efficient AI solutions for genomic data analysis and delivery at scale, optimising query pipelines for low‑latency, high‑throughput access to large‑scale genomic datasets by distributed collaborators. Built AfricaBioLite, a mobile text‑based (USSD/SMS &amp; WhatsApp) genomic analysis platform for low‑connectivity environments.</p>
+      </div>
+      <div class="log-entry">
+        <span class="log-time">ongoing</span>
+        <h3>Team Member — Data Curation &amp; Quality Assurance</h3>
+        <span class="org">African DSI DataBank · <a href="https://hub.africandsidatabank.africa/team" target="_blank" rel="noopener">hub.africandsidatabank.africa</a></span>
+        <p>Contribute to the African DSI DataBank — a federated infrastructure for African‑origin digital sequence information (genomes, proteins, eDNA, metagenomes and One Health data). Curate data and review the platform, identifying record inconsistencies and recommending metadata improvements; supporting ongoing quality assurance and metadata standardisation. Co‑author of the DataBank paper in <i>Nature Reviews Genetics</i> (2026).</p>
       </div>
       <div class="log-entry">
         <span class="log-time">2022 — present</span>
         <h3>Research Assistant &amp; Systems Administrator</h3>
         <span class="org">Biodata Research Group, KNUST · Kumasi, Ghana</span>
-        <p>Manage Linux and HPC infrastructure for large‑scale genomics research, ensuring 24/7 reliability for high‑throughput processing. Develop, maintain and optimise automated Nextflow/Snakemake pipelines; perform QC on sequencing data; manage secure data storage, transfer and archival; mentor 50+ students and researchers in reproducible bioinformatics.</p>
+        <p>Manage Linux and HPC infrastructure for large‑scale genomics research, ensuring 24/7 reliability for high‑throughput processing. Develop, maintain and optimise automated Nextflow/Snakemake pipelines; perform QC on sequencing data; manage secure data storage, transfer and archival; mentor 100+ students and researchers in reproducible bioinformatics.</p>
       </div>
       <div class="log-entry">
         <span class="log-time">2020 — present</span>
@@ -568,7 +181,7 @@
         <span class="log-time">2019 — 2026</span>
         <h3>PhD, Biodata Analytics &amp; Computational Genomics</h3>
         <span class="org">Kwame Nkrumah University of Science and Technology (KNUST), Kumasi</span>
-        <p>Dissertation: <em>vMUS‑dBG — A Novel De Bruijn Graph Model for De Novo Genome Assembly Using Variable‑Length Minimum Unique Substrings.</em></p>
+        <p>Dissertation: <em>vMUS‑dBG — A Novel De Bruijn Graph Model for De Novo Genome Assembly Using Variable‑Length Minimum Unique Substrings.</em> Developed novel graph‑theoretic algorithms for de novo assembly, implemented high‑performance C++/Python tooling, and benchmarked assembly quality on large, complex sequencing datasets.</p>
       </div>
       <div class="log-entry">
         <span class="log-time">2016 — 2017</span>
@@ -592,7 +205,6 @@
         <span class="log-time">May — Dec 2016</span>
         <h3>Certificate Course, Complex Analysis</h3>
         <span class="org">Faculty of Mathematics, Technische Universität Chemnitz, Germany</span>
-        <p>2004–2007 WASSCE, Berekum Senior School, Berekum, Ghana.</p>
       </div>
     </div>
   </div>
@@ -606,43 +218,11 @@
       <div class="sec-rule"></div>
     </div>
     <div class="proj-grid reveal">
-      <div class="proj-card">
-        <div class="tag-row"><span>Flask</span><span>USSD / SMS / WhatsApp</span><span>Public APIs</span></div>
-        <h3>African BioLite</h3>
-        <span class="sub">Mobile genomic platform for low‑connectivity environments — AfricaBP</span>
-        <ul>
-          <li>Server‑side Python app delivering global genomic data to researchers, breeders and clinicians in rural or low‑bandwidth areas via GSM text protocols, bypassing broadband limitations entirely.</li>
-          <li>Layered, channel‑agnostic orchestration pipeline routing raw text queries to Ensembl, UCSC, GTEx and EMBL‑EBI, parsing multi‑kilobyte JSON payloads into condensed, clean text.</li>
-        </ul>
-      </div>
-      <div class="proj-card">
-        <div class="tag-row"><span>C++</span><span>Python</span><span>Graph algorithms</span></div>
-        <h3>vMUS‑dBG</h3>
-        <span class="sub">Variable‑length de Bruijn graphs for genome assembly — PhD dissertation</span>
-        <ul>
-          <li>Novel graph model improving genome assembly contiguity by dynamically adapting variable‑length minimum unique substrings.</li>
-          <li>High‑performance C++ implementation with Python integration for data processing at scale.</li>
-        </ul>
-      </div>
-      <div class="proj-card">
-        <div class="tag-row"><span>R</span><span>Bioconductor</span><span>Survival analysis</span></div>
-        <h3>RNA‑Seq &amp; patient survival modelling</h3>
-        <span class="sub">MPhil thesis — cancer biomarker discovery</span>
-        <ul>
-          <li>Applied SVMs to high‑dimensional RNA‑Seq data, identifying seven diagnostic biomarkers for early‑stage cancer.</li>
-          <li>Implemented Cox Proportional Hazards survival analysis with a hybrid supervised/unsupervised approach to boost prediction accuracy.</li>
-        </ul>
-      </div>
-      <div class="proj-card">
-        <div class="tag-row"><span>OpenCV</span><span>C++</span><span>Kalman filtering</span></div>
-        <h3>Monocular drone victim tracking</h3>
-        <span class="sub">MSc thesis — autonomous computer vision, AIMS‑Ghana</span>
-        <ul>
-          <li>Built a facial‑recognition pipeline adapted for aerial perspectives on a monocular camera.</li>
-          <li>Implemented a Kalman filter for real‑time victim tracking robust to occlusion and motion blur, in a cross‑platform C++/Python codebase.</li>
-        </ul>
-      </div>
+{% include projects/vmus-dbg.html %}
+{% include projects/rcmus.html %}
+{% include projects/dsi-databank.html %}
     </div>
+    <div class="more-row"><a class="btn ghost" href="{{ '/projects/' | relative_url }}">ls projects/ — see all →</a></div>
   </div>
 </section>
 
@@ -655,7 +235,8 @@
     </div>
     <table class="expertise-table reveal">
       <tr><td class="label">programming</td><td class="val">Python, R, C/C++, Bash, SQL</td></tr>
-      <tr><td class="label">bioinformatics</td><td class="val">FastQC, Trimmomatic, Cutadapt, DADA2, minimap2, Hifiasm, LJA, Verkko, Flye, Canu, Shasta, SPAdes, Unicycler, Pilon, samtools, bcftools, GATK, IGV, Prokka/Bakta, BUSCO, QUAST</td></tr>
+      <tr><td class="label">metagenomics &amp; AMR</td><td class="val">Kraken2, Bracken, DADA2; amplicon and shotgun metagenomics, microbial community profiling, AMR gene characterisation, in silico assay evaluation</td></tr>
+      <tr><td class="label">bioinformatics</td><td class="val">FastQC/Falco, fastp, Trimmomatic, Cutadapt, DADA2, minimap2, Hifiasm, LJA, Verkko, Flye, Canu, Shasta, SPAdes, Unicycler, Pilon, samtools, bcftools, GATK, IGV, Prokka/Bakta, BUSCO, QUAST</td></tr>
       <tr><td class="label">pangenomics</td><td class="val">vg toolkit, PGGB, Minigraph‑Cactus, ODGI, GraphAligner, PanTools</td></tr>
       <tr><td class="label">pipelines</td><td class="val">Nextflow, Snakemake, Docker, Singularity, Git/GitHub</td></tr>
       <tr><td class="label">systems</td><td class="val">Linux (Ubuntu), HPC systems, SLURM, server administration</td></tr>
@@ -668,39 +249,11 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="filetag"></span>
-      <h2>Publications</h2>
+      <h2>Recent publications</h2>
       <div class="sec-rule"></div>
     </div>
-    <div class="pub-list reveal">
-      <div class="pub">
-        <span class="yr">2026</span>
-        <span class="cite"><b>vMUS‑dBG:</b> A Novel De Bruijn Graph Model for De Novo Genome Assembly Using Variable‑Length Minimum Unique Substrings. Preprint. <a href="https://doi.org/10.21203/rs.3.rs-8997819/v1" target="_blank" rel="noopener">doi.org/10.21203/rs.3.rs‑8997819/v1</a></span>
-      </div>
-      <div class="pub">
-        <span class="yr">2026</span>
-        <span class="cite"><b>Minimum Unique Substrings</b> as a Context‑Aware k‑mer Alternative for Genomic Sequence Analysis. bioRxiv preprint.</span>
-      </div>
-      <div class="pub">
-        <span class="yr">2025</span>
-        <span class="cite">Contributions of <b>African biodiversity genomics and bioinformatics</b> to the One Health nexus. Preprint.</span>
-      </div>
-      <div class="pub">
-        <span class="yr">2025</span>
-        <span class="cite">Unlocking the <b>African bioeconomy</b> and strengthening biodiversity conservation through genomics and bioinformatics. <i>npj Biodiversity.</i></span>
-      </div>
-      <div class="pub">
-        <span class="yr">2024</span>
-        <span class="cite"><b>Pangenome Analysis</b> of Helicobacter pylori Isolates from Selected Areas of Africa. <i>International Journal of Genomics.</i></span>
-      </div>
-      <div class="pub">
-        <span class="yr">2022</span>
-        <span class="cite">Modelling the <b>Transmission Dynamics of Meningitis</b> among High and Low‑Risk Populations in Ghana. <i>Journal of Abstract and Applied Mathematics.</i></span>
-      </div>
-      <div class="pub">
-        <span class="yr">2021</span>
-        <span class="cite">Model <b>Persistency and Stability Analysis</b> of HIV/AIDS Transmission Dynamics with PrEP and ART. <i>SSRN.</i></span>
-      </div>
-    </div>
+{% include publication-list.html limit=4 %}
+    <div class="more-row"><a class="btn ghost" href="{{ '/publications/' | relative_url }}">all {{ site.data.publications | size }} publications →</a></div>
   </div>
 </section>
 
@@ -715,6 +268,7 @@
       <div>
         <p class="side-label">// workshops organised &amp; facilitated</p>
         <ul class="flat-list">
+          <li><span class="yr">2026</span> Viral and Bacterial Genomics, Antimicrobial Resistance (AMR) Detection and Surveillance — KCCR, Kumasi (October)</li>
           <li><span class="yr">2026</span> Predictive AI for Biodiversity Research in West Africa: Data‑Driven Discovery and Conservation — AfricaBP Regional Workshop, KNUST</li>
           <li><span class="yr">2024–25</span> AfricaBP Eukaryotic Genome Assembly and Annotation Workshop — KNUST</li>
           <li><span class="yr">2020–23</span> H3ABioNet Introduction to Bioinformatics Training — Facilitator</li>
@@ -722,6 +276,7 @@
         <p class="side-label" style="margin-top:30px;">// teaching &amp; mentoring</p>
         <ul class="flat-list" style="border-top:1px solid var(--line);">
           <li style="border-bottom:none; padding-top:12px;">Teaching assistant for H3ABioNet's "Introduction to Bioinformatics" course, covering bioinformatics analysis, Linux systems, genome assembly, RNA‑Seq, variant and metagenomic analysis, and reproducible research workflows.</li>
+          <li style="border-bottom:none; padding-top:0;">Mentor to 100+ undergraduate and postgraduate students (2022–present) in Linux/HPC, RNA‑Seq, variant analysis, metagenomics and AMR profiling, and reproducible workflows with Nextflow, Snakemake and Git.</li>
         </ul>
       </div>
       <div>
@@ -733,60 +288,11 @@
           <li><span class="yr">2022</span> CODATA–RDA Research Data Science Advanced Workshop, ICTP, Trieste</li>
           <li><span class="yr">2022</span> 19th H3Africa Consortium Meeting, Abuja</li>
           <li><span class="yr">2019–20</span> ISCB–Africa ASBCB Conference; Data Science Africa; IndabaX Ghana</li>
+          <li><span class="yr">2018</span> 1st WASLITBRe Postgraduate Bioinformatics Workshop, Covenant University, Lagos</li>
           <li><span class="yr">2018</span> Winter School on Computational Mixed‑Integer Modelling, BTU Cottbus, Germany</li>
+          <li><span class="yr">2016</span> Introduction to Genomics Big Data Science &amp; GWAS Workshops, AIMS‑Ghana / H3ABioNet</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
-
-<footer id="contact">
-  <div class="wrap">
-    <div class="eyebrow mono"></div>
-    <h2>Building genomics infrastructure for Africa – let's talk.</h2>
-    <p class="lede2">Open to collaboration on genome assembly, pangenomics and HPC/pipeline engineering, and to speaking or workshop invitations across African genomics initiatives.</p>
-    <div class="contact-grid">
-      <div><span class="lbl">Email</span><a href="mailto:andrewsf.adu@gmail.com">andrewsf.adu@gmail.com</a></div>
-      <div><span class="lbl">Phone</span><a href="tel:+233241284735">+233 241 284 735</a></div>
-      <div><span class="lbl">GitHub</span><a href="https://github.com/fandrew19" target="_blank" rel="noopener">fandrew19</a></div>
-      <div><span class="lbl">LinkedIn</span><a href="https://www.linkedin.com/in/andrews-frimpong-adu-316193108" target="_blank" rel="noopener">andrews‑frimpong‑adu</a></div>
-      <div><span class="lbl">ORCID</span><a href="https://orcid.org/0000-0002-9260-4439" target="_blank" rel="noopener">0000‑0002‑9260‑4439</a></div>
-      <div><span class="lbl">Based in</span><span style="font-family:'JetBrains Mono',monospace; font-size:13.5px;">KNUST, Kumasi, Ghana</span></div>
-    </div>
-    <div class="foot-bottom">
-      <span>© 2026 Andrews Frimpong Adu</span>
-      <span>chmod +x career — always executable.</span>
-    </div>
-  </div>
-</footer>
-
-<script>
-  // scroll reveal
-  const revealEls = document.querySelectorAll('.reveal');
-  if('IntersectionObserver' in window){
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, {threshold:0.12});
-    revealEls.forEach(el=>io.observe(el));
-  } else {
-    revealEls.forEach(el=>el.classList.add('in'));
-  }
-
-  // ambient basepair texture (static, generated once — not decorative animation)
-  (function(){
-    const el = document.getElementById('basepairs');
-    if(!el) return;
-    const bases = ['A','T','C','G'];
-    let out = '';
-    for(let i=0;i<1400;i++){ out += bases[Math.floor(Math.random()*4)]; }
-    el.textContent = out;
-  })();
-
-  // close mobile nav on link click
-  document.querySelectorAll('nav.navlinks a').forEach(a=>{
-    a.addEventListener('click', ()=>{ document.getElementById('navToggle').checked = false; });
-  });
-</script>
-
-</body>
-</html>

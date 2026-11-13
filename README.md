@@ -2,22 +2,34 @@
 
 Personal site for Andrews Frimpong Adu — bioinformatics engineer & computational genomicist.
 
-This is a custom-built, single-page site (`index.html`), **not** the default Jekyll theme, so it gives full control over layout and design. The `.nojekyll` file tells GitHub Pages to serve `index.html` as-is instead of trying to build it with Jekyll.
+The site is built by GitHub Pages with Jekyll (no theme — the design is custom). Push to `main` and it rebuilds automatically within a minute or two.
 
-## How to publish
+## Pages
 
-1. In this repo (`fandrew19/fandrew19.github.io`), replace the existing files with:
-   - `index.html`
-   - `.nojekyll`
-   - `assets/Andrews_Frimpong_Adu_CV.pdf`
-   - this `README.md`
-   You can delete `_config.yml` — it's no longer used since the site doesn't run through Jekyll.
-2. Commit and push to the `main` branch.
-3. In **Settings → Pages**, make sure the source is set to deploy from the `main` branch, root folder.
-4. Your site will be live at `https://fandrew19.github.io/` within a minute or two of the push.
+| URL | File | What's on it |
+|---|---|---|
+| `/` | `index.html` | Hero, profile, skills, experience, education, 3 featured projects, expertise, 4 most recent publications, teaching |
+| `/projects/` | `projects/index.html` | All projects |
+| `/publications/` | `publications/index.html` | All publications |
 
-## Making updates later
+## Where things live
 
-Everything — text, links, publications, timeline entries — lives directly in `index.html` as plain HTML, organized by section (profile, skills, experience, education, projects, expertise, publications, teaching, contact). Search for the text you want to change and edit it directly; no build step is required.
+- `_layouts/default.html` — the page shell (`<head>`, fonts, stylesheet) shared by every page.
+- `_includes/header.html` / `_includes/footer.html` — the top nav and the contact footer, shared by every page.
+- `assets/css/site.css` — all styles. `assets/js/site.js` — scroll reveal, DNA background, mobile menu.
+- `_includes/projects/*.html` — one file per project card. The home page and `/projects/` both include these, so edit a project in one place.
+- `_data/publications.yml` — the publication list. The home page shows the first 4; `/publications/` shows all.
 
-To swap the downloadable CV, replace `assets/Andrews_Frimpong_Adu_CV.pdf` with a new file of the same name (or update the `href` links in `index.html` if you rename it).
+## Common edits
+
+- **Add a publication:** copy an entry to the top of `_data/publications.yml` and edit it.
+- **Add a project:** create `_includes/projects/<name>.html` (copy an existing card), then add `{% include projects/<name>.html %}` to `projects/index.html` — and to `index.html` too if it should be featured on the home page. Add `featured` to the card's class for a full-width card.
+- **Add a new page:** create `<name>/index.html` starting with front matter (`layout: default`, `title: …`), and add a link to it in `_includes/header.html`.
+- **Swap the CV:** replace `assets/Andrews_Frimpong_Adu_CV.pdf` with a file of the same name.
+
+## Previewing locally (optional)
+
+```bash
+gem install jekyll
+jekyll serve        # then open http://localhost:4000
+```
