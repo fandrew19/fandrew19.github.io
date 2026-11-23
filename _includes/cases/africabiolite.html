@@ -1,0 +1,41 @@
+<article class="case lead" id="africabiolite">
+  <aside class="case-meta">
+    <dl>
+      <dt>role</dt><dd>Lead AI Developer, African BioGenome Project</dd>
+      <dt>also called</dt><dd>AfricaBP Genomic Gateway v2.1</dd>
+      <dt>stack</dt><dd>Python / Flask, Redis + RQ, SQLite, TensorFlow Lite</dd>
+      <dt>channels</dt><dd>USSD, SMS, WhatsApp</dd>
+      <dt>sources</dt><dd>Ensembl, UCSC, GTEx, EMBL‑EBI, UniProt, ENA, NCBI, 1000 Genomes</dd>
+    </dl>
+  </aside>
+  <div class="case-body">
+    <h3>AfricaBioLite</h3>
+    <p class="case-hook">Most genomic resources assume a broadband connection and a browser. AfricaBioLite lets a researcher, plant breeder or clinician query them by SMS, USSD or WhatsApp, from any phone with a mobile signal.</p>
+    <h4>What you can ask it</h4>
+    <p>A user sends a short command, such as <span class="mono">VAR HUMAN rs113488022</span>, <span class="mono">PROT PLASMODIUM KELCH13</span> or <span class="mono">ENA MPOX DRC</span>, or walks a USSD menu. Answers come back as condensed text, an ASCII genome track for feature phones, or a compressed track image, for 15 species from human to cassava, yam, cocoa and <i>Plasmodium</i>.</p>
+    <div class="notes">
+      <div><b>Variants.</b> Location, predicted effect per allele from Ensembl VEP on the MANE transcript, SIFT/PolyPhen scores and ClinVar significance.</div>
+      <div><b>Proteins.</b> UniProt (Swiss‑Prot first), InterPro, Pfam and PROSITE domains, PDB count and AlphaFold model. Only UniProt entries that Ensembl links to the gene are used, so a free‑text match can't return an unrelated protein.</div>
+      <div><b>African populations.</b> Allele frequencies across seven African 1000 Genomes populations and the AFR super‑population, Fst differentiation, and Africa‑enriched variants in a region.</div>
+      <div><b>Sequencing activity.</b> Public runs, samples, recent submissions and the most active studies for pathogens, vectors and crops, by country or Africa‑wide. Country matching is exact, so Niger is never counted as Nigeria.</div>
+      <div><b>Genes and regions.</b> Gene detail, region maps, sequence, UCSC tracks, orthologs, disease associations and GTEx tissue expression.</div>
+      <div><b>Trait &amp; drug‑resistance loci.</b> Curated loci such as <i>kelch13</i>, <i>crt</i>, <i>HBB</i>, <i>G6PD</i>, <i>APOL1</i> and sorghum <i>LGS1</i>, shown only after Ensembl verifies them on the current assembly.</div>
+    </div>
+    <h4>How it's built</h4>
+    <div class="notes">
+      <div><b>One WSGI app for every channel.</b> USSD, SMS and the WhatsApp Cloud API share one app; stateless USSD sessions replay through a menu state machine, so it scales across gunicorn workers.</div>
+      <div><b>USSD never waits on a slow API.</b> Queries run on a Redis/RQ job queue. A fast answer appears on screen; a slow one ends the session with a reference number and arrives by SMS.</div>
+      <div><b>Neural image compression.</b> A MobileNet encoder squeezes a genome‑track image into a ~2 KB latent, sent as SMS packets and decoded on the other end; runs on a Raspberry Pi with a USB GSM modem.</div>
+      <div><b>Offline‑first cache.</b> SQLite with per‑data‑type expiry and prefetch of key loci over Wi‑Fi.</div>
+      <div><b>Privacy and safety.</b> Phone numbers are stored only as keyed pseudonyms, secrets come only from the environment, and clinical results carry a disclaimer.</div>
+      <div><b>Languages, reviewed before release.</b> English is live; Swahili, French, Hausa, Yoruba, Amharic, Twi, Arabic and Portuguese are offered once a native speaker signs them off. A translation that breaks menu numbering or the 182‑character USSD limit falls back to English.</div>
+    </div>
+    <h4>Keeping it correct</h4>
+    <p>Upstream databases rename species and replace assemblies. A weekly CI job runs real queries end to end, rebuilds the species catalogue (assemblies and chromosome‑name maps) from Ensembl, and re‑verifies every trait locus by gene ID.</p>
+    <div class="kvs">
+      <span><b>tests</b> 284 offline, with recorded API fixtures</span>
+      <span><b>ops</b> systemd + nginx, Redis worker, weekly live‑API checks</span>
+      <span><b>species</b> 15 crops, pathogens &amp; vertebrates</span>
+    </div>
+  </div>
+</article>

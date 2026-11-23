@@ -1,0 +1,26 @@
+<article class="case lead" id="vmus-dbg">
+  <aside class="case-meta">
+    <dl>
+      <dt>role</dt><dd>PhD dissertation, 2026</dd>
+      <dt>stack</dt><dd>C++17 extensions, Python orchestration (pybind11)</dd>
+      <dt>methods</dt><dd>Suffix trees &amp; arrays, graph algorithms</dd>
+      <dt>reads</dt><dd>PacBio HiFi, ONT</dd>
+    </dl>
+    <a class="case-link" href="https://doi.org/10.21203/rs.3.rs-8997819/v1" target="_blank" rel="noopener">read the preprint →</a>
+  </aside>
+  <div class="case-body">
+    <h3>vMUS‑dBG</h3>
+    <p class="case-hook">Every de Bruijn graph assembler makes the same compromise: pick one k. Small k collapses repeats; large k shatters unique sequence. vMUS‑dBG removes the choice.</p>
+    <h4>The idea</h4>
+    <p>Instead of fixed‑length k‑mers, each graph node is a <b>Minimum Unique Substring (MUS)</b>: the shortest substring at a position that is unique in the read set and cannot be shortened on either side without losing that uniqueness. MUS length adapts to the genome itself, short in unique regions and long exactly where it must span a repeat boundary. Edges carry the maximal repeat (or gap sequence) between consecutive MUSs in a read, so one assembly run resolves both unique and repetitive regions.</p>
+    <p>The model builds on the duality between MUSs and maximal repeats (Ilie &amp; Smyth) and the Manifold / A‑Bruijn graph (Lin &amp; Pevzner), and extends them to fragmented, error‑prone reads through a <b>read‑consistent</b> definition of uniqueness.</p>
+    <h4>How it's built</h4>
+    <div class="notes">
+      <div><b>Linear‑time extraction.</b> MUS boundaries and maximal repeats in O(N), from a generalised suffix tree (Ukkonen) or a lower‑memory suffix array + LCP backend (SA‑IS + Kasai).</div>
+      <div><b>Iterative read correction.</b> Substitutions and indels voted from overlap evidence with coverage‑adaptive thresholds, restoring read consistency before extraction.</div>
+      <div><b>Per‑position consensus.</b> For gap sequences and node overhangs, plus post‑assembly polishing that re‑aligns every contributing read.</div>
+      <div><b>Coverage‑adaptive resolution.</b> Genuine low‑coverage regions survive alongside noise removal. Self‑contained; uses minimap2 when present.</div>
+    </div>
+    <p class="case-fit">Most useful for repeat‑rich genomes and heterogeneous or metagenomic mixtures.</p>
+  </div>
+</article>

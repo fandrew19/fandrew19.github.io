@@ -1,0 +1,14 @@
+<article class="case" id="deepphylo">
+  <aside class="case-meta">
+    <dl>
+      <dt>stack</dt><dd>Nextflow DSL2, PyTorch, ESM‑2, IQ‑TREE2</dd>
+      <dt>runs on</dt><dd>SLURM with Singularity, MultiQC reports</dd>
+    </dl>
+  </aside>
+  <div class="case-body">
+    <h3>DeepPhylo</h3>
+    <p class="case-hook">Bacterial phylogenetics from raw paired reads to a tree, with an alignment‑free route that uses a protein language model.</p>
+    <p>An end‑to‑end Nextflow pipeline: fastp QC, SPAdes assembly and QUAST, CDS prediction, and eggNOG‑mapper functional annotation (GO, KEGG, COG, EC). The tree can be built two ways: classical MAFFT + IQ‑TREE2 maximum likelihood, or <b>Neighbor‑Joining from ESM‑2 embedding distances</b> with no alignment at all.</p>
+    <p>It also includes an experimental CNN‑Transformer CDS boundary detector that can be trained on any annotated reference.</p>
+  </div>
+</article>
