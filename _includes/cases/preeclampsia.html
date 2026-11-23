@@ -1,14 +1,29 @@
-<article class="case" id="preeclampsia">
+<article class="case lead" id="preeclampsia">
   <aside class="case-meta">
     <dl>
-      <dt>stack</dt><dd>Flask, USSD / SMS, offline PWA, Alembic</dd>
+      <dt>role</dt><dd>Developer</dd>
+      <dt>stack</dt><dd>Flask, PostgreSQL + Alembic, offline PWA, Docker</dd>
+      <dt>channels</dt><dd>USSD, SMS and voice via Africa's Talking</dd>
       <dt>users</dt><dd>Community health workers on feature phones</dd>
+      <dt>status</dt><dd>Reference implementation; thresholds awaiting clinical sign‑off</dd>
     </dl>
+    <a class="case-link" href="mailto:andrewsf.adu@gmail.com?subject=Preeclampsia%20screening%20repository%20access">private repo · available on request →</a>
   </aside>
   <div class="case-body">
     <h3>Preeclampsia screening system</h3>
-    <p class="case-hook">A community health worker dials a short code, answers a few clinical questions, and the patient gets a risk tier with aspirin and referral guidance, then automated SMS reminders.</p>
-    <p>A rule‑based risk engine does the scoring, an agentic escalation state machine handles emergency triage, and an offline‑first Progressive Web App gives health workers the same scoring pipeline without a connection. Contacts are held in an encrypted, consent‑tracked registry with audit logging and JWT role‑based admin access.</p>
-    <p>The LLM is kept on a short leash: it rephrases messages and classifies free‑text symptoms, and never makes a clinical decision.</p>
+    <p class="case-hook">A community health worker dials a short code, answers a few questions, and the patient gets a risk tier with aspirin and referral guidance. An emergency is never left waiting behind the rest of the form.</p>
+    <h4>Safety comes before the score</h4>
+    <p>Danger signs (fits, breathing difficulty, bleeding, severe headache, blurred vision) are asked straight after the patient's identity, and any "yes" ends the session at once with the emergency message and an alert to the health worker. Very high blood pressure or a danger sign forces the highest tier whatever the score says, and new hypertension after 20 weeks triggers a referral within 24 hours. If saving the record fails, the emergency instruction is still shown.</p>
+    <h4>How it's built</h4>
+    <div class="notes">
+      <div><b>Built for a weak signal.</b> A mistyped USSD entry re‑asks the same question instead of ending the session, and a dropped session can be resumed by redialling within 15 minutes.</div>
+      <div><b>Offline app for health workers.</b> A Progressive Web App scores screenings on the device with the same rules as the server, queues them offline, and, with GSM but no data, sends a whole screening as one SMS.</div>
+      <div><b>Escalation that closes the loop.</b> A deterministic state machine retries the health worker, then a backup contact, then a district supervisor, adding a voice call from the second unanswered alert. Referrals are tracked until someone confirms the patient arrived.</div>
+      <div><b>One patient, one record.</b> Patients get 9‑digit codes with a Verhoeff check digit, and idempotency keys stop a resent sync from creating duplicate screenings, alerts or SMS.</div>
+      <div><b>Consent and privacy.</b> SMS reminders need explicit consent, phone numbers are encrypted in a consent‑tracked registry with audit logging, and old session and message data is purged on a schedule.</div>
+      <div><b>An LLM that never decides.</b> It only rephrases reminders and sorts free‑text symptom messages into three states; anything uncertain becomes "unable to classify", never "no danger". Patient free‑text classification stays off until the data‑protection assessment covers it.</div>
+    </div>
+    <h4>Ready for a pilot, honestly</h4>
+    <p>Every rule, threshold and patient message is exported from the code into a clinical review document with approve, modify and reject columns, and CI fails if that document goes stale. A supervisor dashboard, a DHIS2 export and an evaluation script (sensitivity, specificity, PPV, NPV and AUC against recorded outcomes) are in place for the pilot.</p>
   </div>
 </article>

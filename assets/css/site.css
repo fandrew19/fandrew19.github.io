@@ -253,12 +253,6 @@ h1.name em{font-style:italic; color:var(--rust);}
 }
 
 /* ---------- skills grid ---------- */
-.skills-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--line-strong); border:1px solid var(--line-strong); border-radius:8px; overflow:hidden;}
-@media (max-width:760px){.skills-grid{grid-template-columns:1fr;}}
-.skill-card{background:var(--card); padding:26px 24px;}
-.skill-card .k{font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--gold); margin-bottom:10px; display:block;}
-.skill-card h3{font-family:'Instrument Serif', serif; font-style:italic; font-weight:400; font-size:21px; margin:0 0 8px;}
-.skill-card p{margin:0; color:var(--ink-soft); font-size:14.5px;}
 
 /* ---------- timeline (experience / education) ---------- */
 .log{border-left:1px solid var(--line-strong); margin-left:6px;}
@@ -278,36 +272,6 @@ h1.name em{font-style:italic; color:var(--rust);}
 @media (max-width:860px){.two-col{grid-template-columns:1fr; gap:8px;}}
 
 /* ---------- projects ---------- */
-.proj-grid{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
-@media (max-width:760px){.proj-grid{grid-template-columns:1fr;}}
-.proj-card{
-  background:var(--card); border:1px solid var(--line);
-  border-radius:8px; padding:26px;
-  transition:border-color .15s ease, transform .15s ease;
-}
-.proj-card:hover{border-color:var(--ink-soft); transform:translateY(-2px);}
-.proj-card .tag-row{margin-bottom:14px;}
-.proj-card .tag-row span{
-  font-family:'JetBrains Mono', monospace; font-size:10.5px;
-  color:var(--teal); border:1px solid var(--line-strong);
-  padding:3px 7px; border-radius:3px; margin-right:6px; display:inline-block; margin-bottom:6px;
-}
-.proj-card h3{font-family:'Instrument Serif', serif; font-style:italic; font-weight:400; font-size:24px; margin:0 0 4px;}
-.proj-card .sub{font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--ink-soft); margin-bottom:14px; display:block;}
-.proj-card ul{margin:0; padding-left:18px; color:var(--ink-soft); font-size:14.5px;}
-.proj-card li{margin-bottom:6px;}
-.proj-card p.blurb{margin:0 0 12px; color:var(--ink-soft); font-size:14.5px;}
-.proj-card .proj-link{display:inline-block; margin-top:12px; font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--teal); text-decoration:none; border-bottom:1px dotted var(--teal);}
-.proj-card .proj-link:hover{color:var(--rust); border-color:var(--rust);}
-
-/* featured (full-width) project */
-.proj-card.featured{grid-column:1 / -1; border-color:var(--line-strong); padding:32px;}
-.proj-card.featured h3{font-size:32px;}
-.featured-grid{display:grid; grid-template-columns:1.15fr 1fr; gap:36px; margin-top:6px;}
-@media (max-width:860px){.featured-grid{grid-template-columns:1fr; gap:20px;}}
-.featured-grid p{margin:0 0 14px; color:var(--ink-soft); font-size:15px;}
-.featured-grid p.problem{color:var(--ink); font-family:'Instrument Serif', serif; font-style:italic; font-size:19px; line-height:1.45;}
-.proj-card .mini-label{font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--rust); text-transform:uppercase; letter-spacing:0.06em; margin:0 0 10px; display:block;}
 .kvs{margin:18px 0 0; padding-top:14px; border-top:1px solid var(--line); display:flex; flex-wrap:wrap; gap:8px 22px; font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--ink-soft);}
 .kvs b{color:var(--gold); font-weight:500;}
 
@@ -320,20 +284,6 @@ h1.name em{font-style:italic; color:var(--rust);}
 }
 .hero-id .eyebrow{margin-bottom:0;}
 @media (max-width:480px){ .portrait{width:88px; height:88px; flex-basis:88px;} .hero-id{gap:16px;} }
-
-/* ---------- expertise ---------- */
-.expertise-table{width:100%; border-collapse:collapse;}
-.expertise-table tr{border-bottom:1px solid var(--line);}
-.expertise-table tr:last-child{border-bottom:none;}
-.expertise-table td{padding:16px 0; vertical-align:top;}
-.expertise-table td.label{
-  font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--rust);
-  width:190px; padding-right:20px; white-space:nowrap;
-}
-.expertise-table td.val{color:var(--ink-soft); font-size:14.5px; line-height:1.7;}
-@media (max-width:640px){
-  .expertise-table td.label{white-space:normal; width:120px;}
-}
 
 /* ---------- publications ---------- */
 .pub-list{border-top:1px solid var(--line);}
@@ -406,15 +356,13 @@ nav.navlinks a.active::before{color:var(--rust);}
 .track-index{list-style:none; margin:28px 0 0; padding:0; display:flex; flex-wrap:wrap; gap:8px 10px;}
 .track-index a{display:inline-flex; gap:10px; align-items:baseline; padding:8px 14px; border:1px solid var(--line); border-radius:4px; background:var(--card); color:var(--ink); text-decoration:none; font-size:14px; transition:border-color .15s ease;}
 .track-index a:hover{border-color:var(--ink);}
-.track-index span{font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--gold);}
 
 .track{padding:56px 0 8px;}
-.track-head{display:grid; grid-template-columns:72px 1fr; gap:20px; align-items:start; margin-bottom:8px;}
-.track-no{font-family:'Instrument Serif', serif; font-size:56px; line-height:0.9; color:var(--gold);}
+.track-head{margin-bottom:8px; padding-left:16px; border-left:3px solid var(--gold);}
 .track-head h2{font-family:'Instrument Serif', serif; font-weight:400; font-style:italic; font-size:clamp(26px,3.4vw,34px); margin:0 0 6px;}
 .track-head p{margin:0; color:var(--ink-soft); max-width:62ch;}
 
-.case{display:grid; grid-template-columns:220px minmax(0,1fr); gap:44px; padding:36px 0; border-top:1px solid var(--line); margin-left:92px;}
+.case{display:grid; grid-template-columns:220px minmax(0,1fr); gap:44px; padding:36px 0; border-top:1px solid var(--line); margin-left:0;}
 .case-meta dl{margin:0;}
 .case-meta dt{font-family:'JetBrains Mono', monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.07em; color:var(--rust);}
 .case-meta dd{margin:2px 0 14px; font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--ink-soft); line-height:1.5;}
@@ -435,7 +383,7 @@ nav.navlinks a.active::before{color:var(--rust);}
 .notes b{color:var(--ink); font-weight:600;}
 .case .kvs{margin-top:20px;}
 
-.earlier{list-style:none; margin:0 0 0 92px; padding:0;}
+.earlier{list-style:none; margin:0; padding:0;}
 .earlier li{display:grid; grid-template-columns:120px minmax(0,1fr); gap:24px; padding:22px 0; border-top:1px solid var(--line);}
 .earlier .yr{font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--gold); padding-top:4px;}
 .earlier h3{font-family:'Instrument Serif', serif; font-style:italic; font-weight:400; font-size:22px; margin:0 0 4px;}
@@ -451,8 +399,35 @@ nav.navlinks a.active::before{color:var(--rust);}
   .notes{grid-template-columns:1fr;}
 }
 @media (max-width:560px){
-  .track-head{grid-template-columns:1fr; gap:4px;}
-  .track-no{font-size:40px;}
   .earlier li{grid-template-columns:1fr; gap:4px;}
   .case.lead .case-body h3{font-size:30px;}
 }
+
+/* ---------- home: project index linking to /projects/ ---------- */
+.proj-index{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:0 44px;}
+.proj-index li{padding:22px 0; border-top:1px solid var(--line);}
+.proj-index h3{font-family:'Instrument Serif', serif; font-style:italic; font-weight:400; font-size:24px; margin:0 0 6px;}
+.proj-index h3 a{color:var(--ink); text-decoration:none;}
+.proj-index h3 a:hover{color:var(--rust);}
+.proj-index p{margin:0 0 8px; color:var(--ink-soft); font-size:15px;}
+.proj-index .names{font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--ink-soft);}
+.proj-index .names a{color:var(--teal); text-decoration:none; border-bottom:1px dotted var(--teal);}
+.proj-index .names a:hover{color:var(--rust); border-color:var(--rust);}
+@media (max-width:760px){.proj-index{grid-template-columns:1fr;}}
+
+/* ---------- home: skills & tools ---------- */
+.toolkit{border-top:1px solid var(--line-strong);}
+.tk-row{display:grid; grid-template-columns:190px minmax(0,1fr) minmax(0,1.1fr); gap:28px; padding:16px 0; border-bottom:1px solid var(--line);}
+.tk-area{font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--rust); padding-top:2px;}
+.tk-row p{margin:0; color:var(--ink); font-size:15px;}
+.tk-tools{font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--ink-soft); line-height:1.7;}
+@media (max-width:860px){
+  .tk-row{grid-template-columns:1fr; gap:4px;}
+}
+
+/* ---------- compact timeline entries & in-text links ---------- */
+.log-entry.compact{padding-bottom:22px;}
+.log-entry.compact h3{font-size:19px;}
+.log-entry.compact .org{margin-bottom:0;}
+.log-entry p a, .log-entry .org a{color:var(--teal); text-decoration:none; border-bottom:1px dotted var(--teal);}
+.log-entry p a:hover, .log-entry .org a:hover{color:var(--rust); border-color:var(--rust);}
